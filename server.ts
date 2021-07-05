@@ -11,11 +11,15 @@ app.get("/", (req, res) => {
     res.sendFile("/index.html");
 });
 
+
+
+// Game Variables
 const players = [];
+const order = [];
+
 
 // new connection
 io.on("connection", (socket) => {
-    console.log("connected");
     socket.setMaxListeners(10000);
     socket.on("add user", (username) => {
         players.push({ id: socket.id, username: username });
@@ -23,7 +27,6 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnecting", (reason) => {
-        console.log("disconnect");
     });
 });
 
