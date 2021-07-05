@@ -1,0 +1,72 @@
+{
+    "blue": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+    ],
+    "green": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+    ],
+    "red": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+    ],
+    "yellow": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+    ],
+    "special": {
+        "skip": {
+            "blue": 2,
+            "green": 2,
+            "red": 2,
+            "yellow": 2
+        },
+        "reverse": {
+            "blue": 2,
+            "green": 2,
+            "red": 2,
+            "yellow": 2
+        },
+        "take2": {
+            "blue": 2,
+            "green": 2,
+            "red": 2,
+            "yellow": 2
+        },
+        "chooseColor": 4,
+        "take2ChooseColor": 4
+    }
+}
