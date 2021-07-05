@@ -2,9 +2,9 @@
   "name": "uno",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.ts"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
