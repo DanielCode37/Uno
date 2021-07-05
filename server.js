@@ -1,7 +1,14 @@
 const express = require("express");
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(express.static('public'));
+
+// app.use((req, res, next) => {
+//     req.io = io;
+//     next();
+// });
 
 app.get("/", (req, res) => {
     res.sendFile("/index.html");
