@@ -30,7 +30,7 @@ main .stack {
     border: none;
 }
 
-main .deck {
+main #deck {
     position: fixed;
     left: 20vw;
     bottom: 0;
@@ -42,7 +42,7 @@ main .deck {
     overflow-x: scroll;
 }
 
-.deck img {
+#deck img {
     height: 15vh;
     margin: 0.5vh;
     margin-left: 1vh;

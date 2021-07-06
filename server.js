@@ -21,5 +21,6 @@ const game = new Game();
 
 // new connection
 io.on("connection", (socket) => {
-    game.io = socket;
+    socket.setMaxListeners(1000);
+    game.addUser(socket);
 });

@@ -8,42 +8,24 @@ module.exports = class Game {
 	cardPool = [];
 	cardOnStack;
 
-	constructor() {
-
+	addUser(socket) {
+		socket.on("add user", (username) => {
+			this.players.push(new Player(username, socket));
+			this.socketHandler(socket);
+		});
 	}
 
 	/** @param {Socket} socket */
-	set io(socket) {
-		this.socket = socket;
-		this.socketHandler();
-	}
-
-	addUser(username, socket) {
-		this.players.push(new Player(username, socket));
-	}
-
-
-	socketHandler() {
-		this.socket.on("add user", (username) => {
-			this.players.push({ id: this.socket.id, username: username, deck: [] });
-		});
-
-		this.socket.on("disconnecting", (reason) => {
-		});
-
-		this.socket.on("new card", () => {
-			let card = this.randomCard();
-			for (let player of this.players) {
-				if (player.id == this.socket.id) player.deck.push(card);
-			}
-			console.log(this.players);
-			this.socket.to(this.socket.id).emit("new card", card);
+	socketHandler(socket) {
+		socket.on("request new card", () => {
+			socket.emit("new card", this.randomCard());
 		});
 	}
 
 	randomCard() {
 		// TODO: make fourth case and change to " *4" 
 		// Just made for simplicity
+		// TODO: do while for everthing
 		let cardString = "";
 		let repeat = false;
 		switch (Math.round(Math.random() * 3)) {

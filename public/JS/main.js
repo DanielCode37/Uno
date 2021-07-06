@@ -1,6 +1,7 @@
 const socket = io();
 
 socket.emit("add user", (prompt("Enter your name:")));
+socket.emit("test", "s");
 
 
 socket.on("new card", (card) => {
@@ -11,6 +12,6 @@ socket.on("new card", (card) => {
 addEventListener("keydown", (e) => {
     console.log(e.key);
     if (e.key == "Enter") {
-        socket.emit("new card");
+        socket.emit("request new card");
     }
 });
