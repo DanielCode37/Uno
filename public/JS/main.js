@@ -5,13 +5,11 @@ socket.emit("test", "s");
 
 
 socket.on("new card", (card) => {
-    alert()
+    console.log("..................................");
     document.getElementById("deck").insertAdjacentHTML("beforeend", `<img src='./cards/${card}.png' alt='${card}'>`);
 })
 
-addEventListener("keydown", (e) => {
-    console.log(e.key);
-    if (e.key == "Enter") {
-        socket.emit("request new card");
-    }
-});
+setInterval(() => {
+    console.log("----------------------");
+    socket.emit("request new card");
+}, 300);

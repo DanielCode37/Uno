@@ -18,6 +18,7 @@ module.exports = class Game {
 	/** @param {Socket} socket */
 	socketHandler(socket) {
 		socket.on("request new card", () => {
+			console.log("----------------------------------");
 			socket.emit("new card", this.randomCard());
 		});
 	}
