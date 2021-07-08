@@ -1,7 +1,6 @@
 const socket = io();
 
 socket.emit("add user", (prompt("Enter your name:")));
-socket.emit("test", "s");
 
 
 socket.on("new card", (card) => {
@@ -12,4 +11,4 @@ socket.on("new card", (card) => {
 setInterval(() => {
     console.log("----------------------");
     socket.emit("request new card");
-}, 300);
+}, 100);

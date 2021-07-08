@@ -17,60 +17,32 @@ module.exports = class Game {
 
 	/** @param {Socket} socket */
 	socketHandler(socket) {
+		let i = 0;
 		socket.on("request new card", () => {
-			console.log("----------------------------------");
+			console.log(i++);
 			socket.emit("new card", this.randomCard());
 		});
 	}
 
 	randomCard() {
-		// TODO: make fourth case and change to " *4" 
-		// Just made for simplicity
-		// TODO: do while for everthing
-		let cardString = "";
-		let repeat = false;
-		switch (Math.round(Math.random() * 3)) {
-			case 0:
-				do {
-					const random = Math.round(Math.random() * 9);
-					if (freeCards.yellow[random] != 0) {
-						cardString = "y" + random;
-						freeCards.yellow[random]--;
-					}
-					else repeat = true;
-				} while (repeat);
-				break;
-			case 1:
-				do {
-					const random = Math.round(Math.random() * 9);
-					if (freeCards.green[random] != 0) {
-						cardString = "g" + random;
-						freeCards.green[random]--;
-					}
-					else repeat = true;
-				} while (repeat);
-				break;
-			case 2:
-				do {
-					const random = Math.round(Math.random() * 9);
-					if (freeCards.red[random] != 0) {
-						cardString = "r" + random;
-						freeCards.red[random]--;
-					}
-					else repeat = true;
-				} while (repeat);
-				break;
-			case 3:
-				do {
-					const random = Math.round(Math.random() * 9);
-					if (freeCards.blue[random] != 0) {
-						cardString = "b" + random;
-						freeCards.blue[random]--;
-					}
-					else repeat = true;
-				} while (repeat);
-				break;
-		}
-		return cardString;
+		const cards = [
+			'b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6',
+			'b7', 'b8', 'b9', 'b+', 'br', 'bs', 'r0',
+			'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7',
+			'r8', 'r9', 'r+', 'rr', 'rs', 'y0', 'y1',
+			'y2', 'y3', 'y4', 'y5', 'y6', 'y7', 'y8',
+			'y9', 'y+', 'yr', 'ys', 'g0', 'g1', 'g2',
+			'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9',
+			'g+', 'gr', 'gs', 'cc', 'c+'
+		];
+		let retry = false
+		do {
+			let random = cards[Math.round(Math.random() * (cards.length - 1))];
+			if (freeCards[random] == 0) retry = true;
+			else {
+				freeCards[random]--;
+				return random;
+			}
+		} while (retry);
 	}
 }

@@ -3,6 +3,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const Game = require("./Server/Game");
+const Player = require("./Server/Player");
 
 
 
@@ -19,8 +20,16 @@ app.get("/", (req, res) => {
 const game = new Game();
 
 
-// new connection
+// socket listeners
 io.on("connection", (socket) => {
-    socket.setMaxListeners(1000);
-    game.addUser(socket);
+    socket.on("add user", (username) => {
+
+        game.players.push(new Player(username, socket));
+
+        // user is requesting new card
+        socket.on("request new card", () => {
+            socket.emit("new card", game.randomCard())
+        });
+    });
 });
+
