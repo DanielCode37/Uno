@@ -1,5 +1,5 @@
 const { Socket } = require("socket.io");
-const freeCards = require("./freeCards.json");
+const freeCards = require("./cards.json");
 const Player = require("./Player.js");
 
 module.exports = class Game {
