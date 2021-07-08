@@ -1,28 +1,10 @@
-const { Socket } = require("socket.io");
 const freeCards = require("./cards.json");
-const Player = require("./Player.js");
 
 module.exports = class Game {
 	players = [];
 	order = [];
 	cardPool = [];
 	cardOnStack;
-
-	addUser(socket) {
-		socket.on("add user", (username) => {
-			this.players.push(new Player(username, socket));
-			this.socketHandler(socket);
-		});
-	}
-
-	/** @param {Socket} socket */
-	socketHandler(socket) {
-		let i = 0;
-		socket.on("request new card", () => {
-			console.log(i++);
-			socket.emit("new card", this.randomCard());
-		});
-	}
 
 	randomCard() {
 		const cards = [
@@ -35,6 +17,10 @@ module.exports = class Game {
 			'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9',
 			'g+', 'gr', 'gs', 'cc', 'c+'
 		];
+
+		// If all cards are drawn
+		if (this.allCardsUsed(cards)) return "cc";
+
 		let retry = false
 		do {
 			let random = cards[Math.round(Math.random() * (cards.length - 1))];
@@ -44,5 +30,12 @@ module.exports = class Game {
 				return random;
 			}
 		} while (retry);
+	}
+
+	allCardsUsed(cards) {
+		for (let i = 0; i < cards.length; i++) {
+			if (freeCards[cards[i]] != 0) return false;
+		}
+		return true;
 	}
 }
